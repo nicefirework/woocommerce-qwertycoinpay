@@ -58,7 +58,7 @@ Once you've installed and activated WooCommerce, you may install and activate th
 
 **0.2**
 * Local currency support for every BTC:FIAT pair offered by CryptoCompare
-* RPC password support
+* //RPC password support
 * Updated grammar and instructions
 * Updated screenshots
 * Updated Readme

@@ -342,7 +342,7 @@ class qwertycoin_gateway extends WC_Payment_Gateway {
             return $price;
         }
         else {
-            $QWC_price = file_get_contents('https://tradeogre.com/api/v1/ticker/btc-qwc');
+            $QWC_price = file_get_contents('https://api.crex24.com/CryptoExchangeService/BotPublic/ReturnTicker?request=[NamePairs=BTC_QWC]');
             $BTC_price = file_get_contents('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=' . $currency);
        
             $price = json_decode($QWC_price, TRUE);
@@ -356,7 +356,7 @@ class qwertycoin_gateway extends WC_Payment_Gateway {
                 $this->log->add('qwertycoin_gateway', '[ERROR] Unable to get the price of ' + $currency);
             }
 
-            return $price['price']*$bprice[$currency];
+            return $price['HighPrice']*$bprice[$currency];
         }
     }
     
