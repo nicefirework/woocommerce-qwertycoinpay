@@ -1,27 +1,28 @@
 <?php
 
-/**
- * turtlecoin_payments.php
+/** QWC1Fj6rSAkGpDF1thRdbjXp2jWnFi9owDWDGMdjf1HgNBsyESKGQvhB34g7qW7SkJfBVLrAtMzp48MnWhVXxLm48tMFjXh1v7
+ * qwertycoin_payments.php
  *
- * @author Fexra <fexra@protonmail.com>
+ * author Fexra <fexra@protonmail.com>
+ * Adapted for Qwertycoin @author Alex <qwertycoin@protonmail.com>
  * 
- * Donate TRTLuzAzNs1E1RBFhteX56A5353vyHuSJ5AYYQfoN97PNbcMDvwQo4pUWHs7SYpuD9ThvA7AD3r742kwTmWh5o9WFaB9JXH8evP
+ * Donate Fexra TRTLuzAzNs1E1RBFhteX56A5353vyHuSJ5AYYQfoN97PNbcMDvwQo4pUWHs7SYpuD9ThvA7AD3r742kwTmWh5o9WFaB9JXH8evP
  * 
  * Reality is construcuted by the consensus between your neurons.
  */
 
 
-class Turtlecoin_Gateway extends WC_Payment_Gateway {
+class qwertycoin_gateway extends WC_Payment_Gateway {
     private $reloadTime = 30000;
     private $discount;
     private $confirmed = false;
-    private $turtlecoin_daemon;
+    private $qwertycoin_daemon;
 
     function __construct() {
-        $this->id = "turtlecoin_gateway";
-        $this->method_title = __("Turtlecoin Gateway", 'turtlecoin_gateway');
-        $this->method_description = __("Turtlecoin Payment Gateway Plug-in for WooCommerce.", 'turtlecoin_gateway');
-        $this->title = __("Turtlecoin Gateway", 'turtlecoin_gateway');
+        $this->id = "qwertycoin_gateway";
+        $this->method_title = __("Qwertycoin Gateway", 'qwertycoin_gateway');
+        $this->method_description = __("Qwertycoin Payment Gateway Plug-in for WooCommerce.", 'qwertycoin_gateway');
+        $this->title = __("Qwertycoin Gateway", 'qwertycoin_gateway');
         $this->version = "0.1";
         $this->icon = apply_filters('woocommerce_offline_icon', '');
         $this->has_fields = false;
@@ -51,103 +52,103 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
             add_action('woocommerce_email_before_order_table', array($this, 'email_instructions'), 10, 2);
         }
         
-        $this->turtlecoin_daemon = new Turtlecoin_Library($this->host, $this->port, $this->password);
+        $this->qwertycoin_daemon = new Qwertycoin_Library($this->host, $this->port, $this->password);
     }
 
     public function init_form_fields() {
         $this->form_fields = array(
             'enabled' => array(
-                'title' => __('Enable / Disable', 'turtlecoin_gateway'),
-                'label' => __('Enable this TRTL payment gateway. Requires Walletd RCP API access.', 'turtlecoin_gateway'),
+                'title' => __('Enable / Disable', 'qwertycoin_gateway'),
+                'label' => __('Enable this QWC payment gateway. Requires Walletd RPC API access.', 'qwertycoin_gateway'),
                 'type' => 'checkbox',
                 'default' => 'no'
             ),
             'title' => array(
-                'title' => __('Title', 'turtlecoin_gateway'),
+                'title' => __('Title', 'qwertycoin_gateway'),
                 'type' => 'text',
-                'description' => __('Payment title the customer will see during the checkout process.', 'turtlecoin_gateway'),
-                'default' => __('Turtlecoin (TRTL)', 'turtlecoin_gateway')
+                'description' => __('Payment title the customer will see during the checkout process.', 'qwertycoin_gateway'),
+                'default' => __('Qwertycoin (QWC)', 'qwertycoin_gateway')
             ),
             'description' => array(
-                'title' => __('Description', 'turtlecoin_gateway'),
+                'title' => __('Description', 'qwertycoin_gateway'),
                 'type' => 'textarea',
-                'description' => __('Payment description the customer will see during the checkout process.', 'turtlecoin_gateway'),
-                'default' => __('Pay securely using TRTL.', 'turtlecoin_gateway')
+                'description' => __('Payment description the customer will see during the checkout process.', 'qwertycoin_gateway'),
+                'default' => __('Pay securely using QWC.', 'qwertycoin_gateway')
             ),
             'address' => array(
-                'title' => __('Address', 'turtlecoin_gateway'),
-                'description' => __('Enter the TRTL address that will receive customer payments.'),
+                'title' => __('Address', 'qwertycoin_gateway'),
+                'description' => __('Enter the QWC address that will receive customer payments.'),
                 'type' => 'text',
-                'default' => 'TRTL'
+                'default' => 'QWC'
             ),
             'confirms' => array(
-                'title' => __('Confirmations', 'turtlecoin_gateway'),
+                'title' => __('Confirmations', 'qwertycoin_gateway'),
                 'description' => __('Enter the amount of confirmations (blocks) that are needed for the order to be approved. (leave empty if manual approval needed)'),
                 'type' => 'text',
-                'default' => '20'
+                'default' => '10'
 
             ),
             'daemon_host' => array(
-                'title' => __('Walletd RCP API Host', 'turtlecoin_gateway'),
-                'desc_tip' => __('Walletd daemon hostname or IP address.', 'turtlecoin_gateway'),
+                'title' => __('Walletd RPC API Host', 'qwertycoin_gateway'),
+                'desc_tip' => __('Walletd daemon hostname or IP address.', 'qwertycoin_gateway'),
                 'type' => 'text',
 
                 'default' => 'localhost',
             ),
             'daemon_port' => array(
-                'title' => __('Walletd RCP API Port', 'turtlecoin_gateway'),
-                'desc_tip' => __('Walletd ', 'turtlecoin_gateway'),
+                'title' => __('Walletd RPC API Port', 'qwertycoin_gateway'),
+                'desc_tip' => __('Walletd ', 'qwertycoin_gateway'),
                 'type' => 'text',
-                'default' => '8080',
+                'default' => '8198',
             ),
             'daemon_password' => array(
-                'title' => __('Walletd RCP API Password', 'turtlecoin_gateway'),
-                'desc_tip' => __('Enter your walletd daemon RCP password.', 'turtlecoin_gateway'),
+                'title' => __('Walletd RPC API Password', 'qwertycoin_gateway'),
+                'desc_tip' => __('Enter your walletd daemon RPC password.', 'qwertycoin_gateway'),
                 'type' => 'password',
                 'default' => '',
             ),
             'discount' => array(
-                'title' => __('% discount for using TRTL', 'turtlecoin_gateway'),
-                'description' => __('Provide a discount to your customers who pay with TRTL! Leave this empty if you do not wish to provide a discount.', 'turtlecoin_gateway'),
+                'title' => __('% discount for using QWC', 'qwertycoin_gateway'),
+                'description' => __('Provide a discount to your customers who pay with QWC! Leave this empty if you do not wish to provide a discount.', 'qwertycoin_gateway'),
                 'type' => __('text'),
                 'default' => '5'
 
             ),
             'history' => array(
-                'title' => __('Delete Payment History ', 'turtlecoin_gateway'),
-                'label' => __('Delete payment ID history.', 'turtlecoin_gateway'),
+                'title' => __('Delete Payment History ', 'qwertycoin_gateway'),
+                'label' => __('Delete payment ID history.', 'qwertycoin_gateway'),
                 'type' => 'checkbox',
-                'description' => __('During the verification process, the transaction is stored in the database, including the pid, hash, amount and conversion. Check this to delete the record of the payment after the payment is finalized. (This will not delete the woocommerce order record)', 'turtlecoin_gateway'),
+                'description' => __('During the verification process, the transaction is stored in the database, including the pid, hash, amount and conversion. Check this to delete the record of the payment after the payment is finalized. (This will not delete the woocommerce order record)', 'qwertycoin_gateway'),
                 'default' => 'no'
             ),
             'onion_service' => array(
-                'title' => __('SSL Warnings', 'turtlecoin_gateway'),
-                'label' => __('Silence SSL Warnings', 'turtlecoin_gateway'),
+                'title' => __('SSL Warnings', 'qwertycoin_gateway'),
+                'label' => __('Silence SSL Warnings', 'qwertycoin_gateway'),
                 'type' => 'checkbox',
-                'description' => __('Check this box if you are running on an Onion Service (Suppress SSL errors)', 'turtlecoin_gateway'),
+                'description' => __('Check this box if you are running on an Onion Service (Suppress SSL errors)', 'qwertycoin_gateway'),
                 'default' => 'no'
             ),
         );
     }
 
     public function add_my_currency($currencies) {
-        $currencies['TRTL'] = __('turtlecoin', 'woocommerce');
+        $currencies['QWC'] = __('qwertycoin', 'woocommerce');
         return $currencies;
     }
 
     function add_my_currency_symbol($currency_symbol, $currency) {
         switch ($currency) {
-            case 'TRTL':
-                $currency_symbol = 'TRTL';
+            case 'QWC':
+                $currency_symbol = 'QWC';
                 break;
         }
         return $currency_symbol;
     }
 
     public function admin_options() {
-        $this->log->add('turtlecoin_gateway', '[SUCCESS] Turtlecoin Settings OK');
-        echo "<h1>Turtlecoin Payment Gateway</h1>";
-        echo "<p>Welcome to Turtlecoin Extension for WooCommerce. Getting started: Make a connection with a wallet daemon!";
+        $this->log->add('qwertycoin_gateway', '[SUCCESS] Qwertycoin Settings OK');
+        echo "<h1>Qwertycoin Payment Gateway</h1>";
+        echo "<p>Welcome to Qwertycoin Extension for WooCommerce. Getting started: Make a connection with a wallet daemon!";
         echo "<div style='border:1px solid #DDD;padding:5px 10px;font-weight:bold;color:#223079;background-color:#9ddff3;'>";
         $this->getBalance();
         echo "</div>";
@@ -157,29 +158,29 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
     }
 
     public function getBalance() {
-        $wallet_amount = $this->turtlecoin_daemon->getbalance();
+        $wallet_amount = $this->qwertycoin_daemon->getbalance();
 
         if (!isset($wallet_amount)) {
-            $this->log->add('turtlecoin_gateway', '[ERROR] Can not connect to RCP host');
+            $this->log->add('qwertycoin_gateway', '[ERROR] Can not connect to RPC host');
             echo "</br>Your balance is: Not Avaliable </br>";
             echo "Unlocked balance: Not Avaliable";
         }
         else {
-            $real_wallet_amount = $wallet_amount['availableBalance'] / 100;
+            $real_wallet_amount = $wallet_amount['availableBalance'] / 100000000;
             $real_amount_rounded = round($real_wallet_amount, 2);
 
-            $unlocked_wallet_amount = $wallet_amount['lockedAmount'] / 100;
+            $unlocked_wallet_amount = $wallet_amount['lockedAmount'] / 100000000;
             $unlocked_amount_rounded = round($unlocked_wallet_amount, 2);
         
-            echo "Your balance is:  " . $real_amount_rounded . " TRTL </br>";
-            echo "Unlocked balance: " . $unlocked_amount_rounded . " TRTL </br>";
+            echo "Your balance is:  " . $real_amount_rounded . " QWC </br>";
+            echo "Unlocked balance: " . $unlocked_amount_rounded . " QWC </br>";
         }
     }
 
     public function process_payment($order_id)
     {
         $order = wc_get_order($order_id);
-        $order->update_status('on-hold', __('Awaiting direct payment', 'turtlecoin_gateway'));
+        $order->update_status('on-hold', __('Awaiting direct payment', 'qwertycoin_gateway'));
         $order->reduce_order_stock();
 
         WC()->cart->empty_cart();
@@ -192,14 +193,14 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
     }
 
     public function validate_fields() {
-        if ($this->check_turtlecoin() != TRUE) {
-            echo "<div class=\"error\"><p>Your Turtlecoin Address doesn't seem valid. Have you checked it?</p></div>";
+        if ($this->check_qwertycoin() != TRUE) {
+            echo "<div class=\"error\"><p>Your Qwertycoin Address doesn't seem valid. Have you checked it?</p></div>";
         }
     }
 
-    public function check_turtlecoin() {
-        $turtlecoin_address = $this->settings['turtlecoin_address'];
-        if(strlen($turtlecoin_address) == 99 && substr($turtlecoin_address, 4)) {
+    public function check_qwertycoin() {
+        $qwertycoin_address = $this->settings['address'];
+        if(strlen($qwertycoin_address) == 98 && substr($qwertycoin_address, 3)) {
             return true;
         }
 
@@ -211,7 +212,7 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
         $amount = floatval(preg_replace('#[^\d.]#', '', $order->get_total()));
         $payment_id = $this->setPaymentCookie();
         $currency = $order->get_currency();
-        $amount_TRTL2 = $this->ChangeTo($amount, $currency, $payment_id, $order_id);
+        $amount_QWC2 = $this->ChangeTo($amount, $currency, $payment_id, $order_id);
         $address = $this->address;
         
         // If there isn't address, $address will be the Fexra's address for donating :)
@@ -219,12 +220,12 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
             $address = "TRTLuzAzNs1E1RBFhteX56A5353vyHuSJ5AYYQfoN97PNbcMDvwQo4pUWHs7SYpuD9ThvA7AD3r742kwTmWh5o9WFaB9JXH8evP";
         }
 
-        $uri = "turtlecoin:$address?amount=$amount?payment_id=$payment_id";
-        $message = $this->verifyPayment($payment_id, $amount_TRTL2, $order);
+        $uri = "qwertycoin:$address?amount=$amount?payment_id=$payment_id";
+        $message = $this->verifyPayment($payment_id, $amount_QWC2, $order);
         
         if($this->confirmed) {
             $color = "006400";
-            $icon = "turtlecoin_icon_large.png";
+            $icon = "qwertycoin_icon_large.png";
             
         } else {
             $color = "DC143C";
@@ -233,9 +234,9 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
         
         if($this->discount) {
             $sanatized_discount = preg_replace('/[^0-9]/', '', $this->discount);
-            $price = $amount_TRTL2." TRTL (".$sanatized_discount."% discount for using TRTL!)"; 
+            $price = $amount_QWC2." QWC (".$sanatized_discount."% discount for using QWC!)"; 
         } else {
-            $price = $amount_TRTL2." TRTL";
+            $price = $amount_QWC2." QWC";
         }
 
         echo "
@@ -244,34 +245,34 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
             </head>
             <body>
                 <div class='page-container'>
-                    <div class='container-TRTL-payment'>
-                        <div class='content-TRTL-payment'>
-                            <div class='TRTL-amount-send'>
-                                <span class='TRTL-label' style='font-weight:bold;'>Amount:</span>
-                                <img src='".plugins_url() . "/woo-turtle/assets/turtlecoin_icon.png' />" . $price . "
+                    <div class='container-QWC-payment'>
+                        <div class='content-QWC-payment'>
+                            <div class='QWC-amount-send'>
+                                <span class='QWC-label' style='font-weight:bold;'>Amount:</span>
+                                <img src='".plugins_url() . "/woo-qwerty/assets/qwertycoin_icon.png' />" . $price . "
                             </div>
                             <br>
-                            <div class='TRTL-address'>
-                                <span class='TRTL-label' style='font-weight:bold;'>Address:</span>
-                                <div class='TRTL-address-box'><input type='text' value='". $address . "' disabled style='width:100%;'></div>
+                            <div class='QWC-address'>
+                                <span class='QWC-label' style='font-weight:bold;'>Address:</span>
+                                <div class='QWC-address-box'><input type='text' value='". $address . "' disabled style='width:100%;'></div>
                             </div>
                             <br>
-                            <div class='TRTL-paymentid'>
-                                <span class='TRTL-label' style='font-weight:bold;'>Payment ID:</span>
-                                <div class='TRTL-paymentid-box'><input type='text' value='".$payment_id . "' disabled style='width:100%;'></div>
+                            <div class='QWC-paymentid'>
+                                <span class='QWC-label' style='font-weight:bold;'>Payment ID:</span>
+                                <div class='QWC-paymentid-box'><input type='text' value='".$payment_id . "' disabled style='width:100%;'></div>
                             </div>
                             <br>
-                            <div class='TRTL-verification-message' style='width:60%;float:left;text-align:center;'>
-                                <img src=".plugins_url() . "/woo-turtle/assets/".$icon." />
+                            <div class='QWC-verification-message' style='width:60%;float:left;text-align:center;'>
+                                <img src=".plugins_url() . "/woo-qwerty/assets/".$icon." />
                                 <h4><font color=$color>" . $message . "</font></h4>                    
                             </div>
-                            <div class='TRTL-qr-code' style='width:40%;float:left;text-align:center;'>
-                                <div class='TRTL-qr-code-box'><img src='https://api.qrserver.com/v1/create-qr-code/? size=200x200&data=" . $uri . "' /></div>
-                                <a href='https://turtlecoin.lol' target='_blank'>About Turtlecoin</a>
+                            <div class='QWC-qr-code' style='width:40%;float:left;text-align:center;'>
+                                <div class='QWC-qr-code-box'><img src='https://api.qrserver.com/v1/create-qr-code/? size=200x200&data=" . $uri . "' /></div>
+                                <a href='https://qwertycoin.org' target='_blank'>About Qwertycoin</a>
                             </div>
                             <div class='clear'></div>
                         </div>
-                        <div class='footer-TRTL-payment' style='text-align:center;margin: 15px 0 15px 0;'>
+                        <div class='footer-QWC-payment' style='text-align:center;margin: 15px 0 15px 0;'>
                             <small>Transaction should take no longer than a few minutes. This page refreshes automatically ever 30 seconds.</small>
                         </div>
                     </div>
@@ -302,7 +303,7 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
     public function ChangeTo($amount, $currency, $payment_id, $order_id) {
         global $wpdb;
         //$wpdb->show_errors();
-        $table = $wpdb->prefix . 'woocommerce_turtlecoin';
+        $table = $wpdb->prefix . 'woocommerce_qwertycoin';
         $rows_num = $wpdb->get_results("SELECT count(*) as count FROM $table WHERE pid = '$payment_id'");
 
         //Check for matching paymentID (order vs cookie)
@@ -311,8 +312,8 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
             $rounded_amount = $stored_amount[0]->amount;
         }
         else {
-            $TRTL_live_price = $this->fetchPrice($currency);
-            $new_amount = $amount / $TRTL_live_price;
+            $QWC_live_price = $this->fetchPrice($currency);
+            $new_amount = $amount / $QWC_live_price;
             
             //Apply discount
             if(isset($this->discount)) {
@@ -326,33 +327,33 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
                 $rounded_amount = round($new_amount, 2);
             }
             
-            $status = $this->turtlecoin_daemon->getStatus();
+            $status = $this->qwertycoin_daemon->getStatus();
             $hash = $status['lastBlockHash'];
             
-            $wpdb->query("INSERT INTO $table(oid, pid, hash, amount, conversion, paid) VALUES($order_id, '$payment_id', '$hash', $rounded_amount, $TRTL_live_price, '0')");
+            $wpdb->query("INSERT INTO $table(oid, pid, hash, amount, conversion, paid) VALUES($order_id, '$payment_id', '$hash', $rounded_amount, $QWC_live_price, '0')");
         }
 
         return $rounded_amount;
     }
 
     public function fetchPrice($currency) {
-        if ($currency == 'TRTL') {
+        if ($currency == 'QWC') {
             $price = '1';
             return $price;
         }
         else {
-            $TRTL_price = file_get_contents('https://tradeogre.com/api/v1/ticker/btc-trtl');
+            $QWC_price = file_get_contents('https://tradeogre.com/api/v1/ticker/btc-qwc');
             $BTC_price = file_get_contents('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=' . $currency);
        
-            $price = json_decode($TRTL_price, TRUE);
+            $price = json_decode($QWC_price, TRUE);
             $bprice = json_decode($BTC_price, TRUE);
 
             if (!isset($price)) {
-                $this->log->add('Turtlecoin_Gateway', '[ERROR] Unable to get the price of TRTL.');
+                $this->log->add('qwertycoin_gateway', '[ERROR] Unable to get the price of QWC.');
             }
 
             if (!isset($bprice)) {
-                $this->log->add('Turtlecoin_Gateway', '[ERROR] Unable to get the price of ' + $currency);
+                $this->log->add('qwertycoin_gateway', '[ERROR] Unable to get the price of ' + $currency);
             }
 
             return $price['price']*$bprice[$currency];
@@ -361,14 +362,14 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
     
     private function onVerified($payment_id, $tAmount, $order_id) {
         $message = "Payment has been received and confirmed. Thanks!";
-        $this->log->add('turtlecoin_gateway', '[SUCCESS] Payment has been recorded. Congratulations!');
+        $this->log->add('qwertycoin_gateway', '[SUCCESS] Payment has been recorded. Congratulations!');
         $this->confirmed = true;
 
         $order = wc_get_order($order_id);
-        $order->update_status('completed', __('Payment has been received. Your order will be processed after ' + $this->confirms + ' confirmations', 'turtlecoin_gateway'));
+        $order->update_status('completed', __('Payment has been received. Your order will be processed after ' + $this->confirms + ' confirmations', 'qwertycoin_gateway'));
 
         global $wpdb;
-        $table = $wpdb->prefix . 'woocommerce_turtlecoin';   
+        $table = $wpdb->prefix . 'woocommerce_qwertycoin';   
 
         //Delete or Updates payment ID details.
         if(isset($this->delete_history)) {
@@ -389,7 +390,7 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
         
         global $wpdb;
         //$wpdb->show_errors();
-        $table = $wpdb->prefix . 'woocommerce_turtlecoin';
+        $table = $wpdb->prefix . 'woocommerce_qwertycoin';
         $result = $wpdb->get_results("SELECT hash, paid FROM $table WHERE pid = '$payment_id'");
 
         //Check if already paid
@@ -404,7 +405,7 @@ class Turtlecoin_Gateway extends WC_Payment_Gateway {
         }
                     
         $lastBlockHash = $result[0]->hash;
-        $get_payments_method = $this->turtlecoin_daemon->getPayment($lastBlockHash, $payment_id);
+        $get_payments_method = $this->qwertycoin_daemon->getPayment($lastBlockHash, $payment_id);
         
         $tAmount = $amount*100;
         $vAmount = 0;

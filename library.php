@@ -2,13 +2,14 @@
 /**
  * library.php
  *
- * @author Fexra <fexra@protonmail.com>
+ * author Alex <qwertycoin@protonmail.com>
+ * Adapted for Qwertycoin @author Alex <qwertycoin@protonmail.com>
  * 
- * Donate TRTLuzAzNs1E1RBFhteX56A5353vyHuSJ5AYYQfoN97PNbcMDvwQo4pUWHs7SYpuD9ThvA7AD3r742kwTmWh5o9WFaB9JXH8evP
+ * Donate Fexra TRTLuzAzNs1E1RBFhteX56A5353vyHuSJ5AYYQfoN97PNbcMDvwQo4pUWHs7SYpuD9ThvA7AD3r742kwTmWh5o9WFaB9JXH8evP
  * 
  * Reality is the concensus constructed between your neurons.
  */
-class Turtlecoin_Library {
+class Qwertycoin_Library {
     protected $url = null, $is_debug = false, $parameters_structure = 'array';
     protected $curl_options = array(
         CURLOPT_CONNECTTIMEOUT => 8,
@@ -155,7 +156,7 @@ class Turtlecoin_Library {
         }
 
         if (0 < curl_errno($ch)) {
-           echo '[ERROR] Failed to connect to turtlecoin-wallet-rpc at ' . $this->host . ' port '. $this->port .'</br>';
+           echo '[ERROR] Failed to connect to qwertycoin-wallet-rpc at ' . $this->host . ' port '. $this->port .'</br>';
         }
 
         curl_close($ch);

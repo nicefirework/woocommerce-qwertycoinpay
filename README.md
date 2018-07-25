@@ -1,5 +1,5 @@
-# TurtleCoin WooCommerce Extension
-**Tags:** turtlecoin, woocommerce, integration, payment, merchant, cryptocurrency, accept turtlecoin, turtlecoin woocommerce
+# Qwertycoin WooCommerce Extension
+**Tags:** qwertycoin, woocommerce, integration, payment, merchant, cryptocurrency, accept qwertycoin, qwertycoin woocommerce
 
 **Requires**: WordPress 4.x.x, WooCommerce 3.x.x
 
@@ -9,33 +9,33 @@
 
 **License URI**: http://www.gnu.org/licenses/gpl-3.0.html
  
-TurtleCoin WooCommerce Extension is a WordPress plugin that allows merchants to accept TRTL Shells as payments at WooCommerce-powered online stores.
+Qwertycoin WooCommerce Extension is a WordPress plugin that allows merchants to accept TRTL Shells as payments at WooCommerce-powered online stores.
 
 ## Description
 
 Your online store must use the WooCommerce platform (a free WordPress plugin).
-Once you've installed and activated WooCommerce, you may install and activate the TurtleCoin WooCommerce Extension.
+Once you've installed and activated WooCommerce, you may install and activate the Qwertycoin WooCommerce Extension.
 
 **Benefits**
 
-* Accept payments directly into your personal TurtleCoin wallet.
-* Accept payment in TurtleCoin for physical and digital downloadable products.
-* Add a TurtleCoin payments option to your existing online store with alternative main currency.
-* Automatic conversion to TurtleCoin via realtime exchange rate feed and calculation.
+* Accept payments directly into your personal Qwertycoin wallet.
+* Accept payment in Qwertycoin for physical and digital downloadable products.
+* Add a Qwertycoin payments option to your existing online store with alternative main currency.
+* Automatic conversion to Qwertycoin via realtime exchange rate feed and calculation.
 
 ## Dependencies
 
 - WordPress. This can be downloaded from [wordpress.org](https://wordpress.org) or cloning their [github repo](https://github.com/WordPress/WordPress)
 - WooCommerce. This can be downloaded from [wordpress.org](https://wordpress.org/plugins/woocommerce/) or cloning their [github repo](https://github.com/woocommerce/woocommerce)
 - A webserver with the latest versions of PHP and MySQL.
-- A running walletd daemon that is accesible by the webserver. This can be downloaded from the [turtlecoin repo](https://github.com/turtlecoin/turtlecoin). For instructions check out the [turtlecoin-wiki repo](https://github.com/turtlecoin/turtlecoin-wiki/wiki/Getting-Started)
+- A running walletd daemon that is accesible by the webserver. This can be downloaded from the [qwertycoin repo](https://github.com/qwertycoin-org/qwertycoin). For instructions check out the [qwertycoin-wiki repo](https://github.com/qwertycoin-org/qwertycoin-wiki/wiki/Getting-Started)
 
 
 ## Installation
 
 1. Download this repo as a ZIP file and move the content to /wp-content/plugins/ or git clone this repo in /wp-content/plugins 
 2. Activate the plugin in the WordPress admin panel.
-3. Configure it with your walletd daemon RCP API.
+3. Configure it with your walletd daemon RPC API.
 4. Profit.
 
 ## Remove Plugin
@@ -45,11 +45,11 @@ Once you've installed and activated WooCommerce, you may install and activate th
 
 ## Screenshots
 
-### 1. TurtleCoin Checkout Gateway  
-![gateway](https://github.com/turtlecoin/woo-turtle/blob/master/assets/screenshots/gateway.png "TurtleCoin Checkout Gateway")
+### 1. Qwertycoin Checkout Gateway  
+![gateway](https://github.com/qwertycoin-org/woo-qwerty/blob/master/assets/screenshots/gateway.png "Qwertycoin Checkout Gateway")
   
-### 2. TurtleCoin Options  
-![options](https://github.com/turtlecoin/woo-turtle/blob/master/assets/screenshots/options.png "TurtleCoin Options")
+### 2. Qwertycoin Options  
+![options](https://github.com/qwertycoin-org/woo-qwerty/blob/master/assets/screenshots/options.png "Qwertycoin Options")
 
 ## Changelog
 
@@ -58,7 +58,7 @@ Once you've installed and activated WooCommerce, you may install and activate th
 
 **0.2**
 * Local currency support for every BTC:FIAT pair offered by CryptoCompare
-* RCP password support
+* RPC password support
 * Updated grammar and instructions
 * Updated screenshots
 * Updated Readme
