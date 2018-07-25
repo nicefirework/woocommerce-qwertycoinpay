@@ -249,7 +249,7 @@ class qwertycoin_gateway extends WC_Payment_Gateway {
                         <div class='content-QWC-payment'>
                             <div class='QWC-amount-send'>
                                 <span class='QWC-label' style='font-weight:bold;'>Amount:</span>
-                                <img src='".plugins_url() . "/woo-qwerty/assets/qwertycoin_icon.png' />" . $price . "
+                                <img src='".plugins_url() . "/qwc-ommerce/assets/qwertycoin_icon.png' />" . $price . "
                             </div>
                             <br>
                             <div class='QWC-address'>
@@ -263,7 +263,7 @@ class qwertycoin_gateway extends WC_Payment_Gateway {
                             </div>
                             <br>
                             <div class='QWC-verification-message' style='width:60%;float:left;text-align:center;'>
-                                <img src=".plugins_url() . "/woo-qwerty/assets/".$icon." />
+                                <img src=".plugins_url() . "/qwc-ommerce/assets/".$icon." />
                                 <h4><font color=$color>" . $message . "</font></h4>                    
                             </div>
                             <div class='QWC-qr-code' style='width:40%;float:left;text-align:center;'>

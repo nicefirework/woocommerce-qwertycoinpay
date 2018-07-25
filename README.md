@@ -46,10 +46,10 @@ Once you've installed and activated WooCommerce, you may install and activate th
 ## Screenshots
 
 ### 1. Qwertycoin Checkout Gateway  
-![gateway](https://github.com/qwertycoin-org/woo-qwerty/blob/master/assets/screenshots/gateway.png "Qwertycoin Checkout Gateway")
+![gateway](https://github.com/qwertycoin-org/qwc-ommerce/blob/master/assets/screenshots/gateway.png "Qwertycoin Checkout Gateway")
   
 ### 2. Qwertycoin Options  
-![options](https://github.com/qwertycoin-org/woo-qwerty/blob/master/assets/screenshots/options.png "Qwertycoin Options")
+![options](https://github.com/qwertycoin-org/qwc-ommerce/blob/master/assets/screenshots/options.png "Qwertycoin Options")
 
 ## Changelog
 
